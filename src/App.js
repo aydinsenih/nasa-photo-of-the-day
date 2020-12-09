@@ -1,13 +1,21 @@
-import React from "react";
+import React,{useState} from "react";
 import "./App.css";
+import GetAPOD from './GetAPOD';
+import DatePicker from "react-datepicker";
+import "./datePickerCss/datepicker.scss";
 
 function App() {
+  const [pickedDate, setPickedDate] = useState(new Date());//2012-03-14
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role="img" aria-label='go!'>🚀</span>!
-      </p>
+      <p>Pick a day to see NASA APOD </p>
+      <DatePicker 
+        dateFormat="yyyy-MM-dd"
+        selected={pickedDate}
+        onChange={date => setPickedDate(date)}
+      />
+      <GetAPOD date={pickedDate}/>
+      
     </div>
   );
 }
