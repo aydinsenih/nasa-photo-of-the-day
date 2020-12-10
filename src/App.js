@@ -3,12 +3,14 @@ import "./App.css";
 import GetAPOD from './GetAPOD';
 import DatePicker from "react-datepicker";
 import "./datePickerCss/datepicker.scss";
+import styled from "styled-components";
 
 function App() {
-  const [pickedDate, setPickedDate] = useState(new Date());//2012-03-14
+  const [pickedDate, setPickedDate] = useState(new Date());
+  console.log(pickedDate.getFullYear())
   return (
-    <div className="App">
-      <p>Pick a day to see NASA APOD </p>
+    <AppDiv>
+      <h2>Pick a day to see <span>NASA</span> APOD </h2>
       <DatePicker 
         dateFormat="yyyy-MM-dd"
         selected={pickedDate}
@@ -16,8 +18,25 @@ function App() {
       />
       <GetAPOD date={pickedDate}/>
       
-    </div>
+    </AppDiv>
   );
 }
+
+const AppDiv = styled.div`
+background-color:#4f5b66;
+text-align: center;
+p{
+  font-weight: bold;
+  font-size: 1.1em; 
+}
+input{
+  color: black;
+  background-color:grey;
+}
+h2 span{
+  color: LIGHTYELLOW;
+}
+
+`;
 
 export default App;

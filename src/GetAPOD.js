@@ -1,14 +1,20 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import {BASE_URL, API_KEY} from './constants';
-import moment from 'moment';
+import styled from "styled-components";
 
 export default function GetAPOD(props){
+
     const [apodData, setApodData] = useState([])
     const {date} = props;
 
+    function formatDate(date){
+        return date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+    }
+
     useEffect(()=>{
-        const formattedDate = moment(date).format("YYYY-MM-DD");
+        const formattedDate = formatDate(date)
+
         axios.get(`${BASE_URL}/planetary/apod?api_key=${API_KEY}&date=${formattedDate}`)
         .then(res =>{
             console.log(res.data)
@@ -18,7 +24,7 @@ export default function GetAPOD(props){
     }, [date])
 
     return (
-        <div className="APOD">
+        <StyledAPOD>
             <h1>{apodData.title}</h1>
             {apodData.media_type === "image" 
             ? <img src={apodData.url} alt="NASA APOD" />
@@ -26,6 +32,13 @@ export default function GetAPOD(props){
             
             }
             <p>{apodData.explanation}</p>
-        </div>
+        </StyledAPOD>
     )
 }
+
+const StyledAPOD = styled.div`
+    h1:hover{
+        width: 100%;
+        font-size: 2.1em;
+    }
+    `;
