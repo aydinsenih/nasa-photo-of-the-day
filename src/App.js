@@ -23,7 +23,7 @@ function App() {
 }
 
 const AppDiv = styled.div`
-background-color:#4f5b66;
+background-color: ${props =>  props.theme.secondaryColor};
 text-align: center;
 p{
   font-weight: bold;

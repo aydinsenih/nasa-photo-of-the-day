@@ -37,6 +37,7 @@ export default function GetAPOD(props){
 }
 
 const StyledAPOD = styled.div`
+    color: ${props => props.theme.primaryColor ? props.theme.primaryColor : "black"};
     h1:hover{
         width: 100%;
         font-size: 2.1em;
